@@ -6,39 +6,106 @@
   <title>Happy Birthday Khatisa!</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background: linear-gradient(to right, #ffecd2, #fcb69f);
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
       text-align: center;
-      padding: 50px;
       color: #333;
     }
 
     h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
+      font-size: 3.5em;
+      margin-top: 100px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     p {
       font-size: 1.5em;
-      margin-bottom: 1em;
+      animation: fadeIn 3s ease-in-out;
     }
 
-    .cake {
-      font-size: 5em;
-      animation: bounce 1s infinite alternate;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-20px); }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .balloon img {
+      width: 60px;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+    }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="cake">🎂</div>
-  <h1>Happy Birthday, Khatisa! 🎉</h1>
-  <p>Wishing you a day filled with love, laughter, and cake!</p>
-  <p>You're amazing, and today we celebrate YOU! 💖</p>
-  <div class="cake">🎈🎁🎈</div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <h1>🎉 Happy Birthday, Khatisa! 🎉</h1>
+  <p>Wishing you joy, love, and lots of cake! 🎂</p>
+
+  <!-- Balloons -->
+  <div class="balloon" style="left: 20%; animation-delay: 0s;">
+    <img src="https://i.ibb.co/9sNRnm2/balloon-red.png" alt="Red Balloon">
+  </div>
+  <div class="balloon" style="left: 50%; animation-delay: 3s;">
+    <img src="https://i.ibb.co/vkDx71k/balloon-blue.png" alt="Blue Balloon">
+  </div>
+  <div class="balloon" style="left: 80%; animation-delay: 1.5s;">
+    <img src="https://i.ibb.co/vV3xrwz/balloon-yellow.png" alt="Yellow Balloon">
+  </div>
+
+  <!-- Optional: Birthday music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const confetti = window.confetti.create(canvas, { resize: true, useWorker: true });
+
+    // Fire confetti every 2 seconds
+    setInterval(() => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }, 2000);
+  </script>
+
 </body>
 </html>
